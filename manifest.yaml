@@ -29,24 +29,24 @@ spec:
         labelSelector:
           matchLabels:
             project: roboshop
-      # - maxSkew: 1
-      #   topologyKey: topology.kubernetes.io/node
-      #   whenUnsatisfiable: ScheduleAnyway
-      #   labelSelector:
-      #     matchLabels:
-      #       project: roboshop
+      - maxSkew: 1
+        topologyKey: topology.kubernetes.io/node
+        whenUnsatisfiable: ScheduleAnyway
+        labelSelector:
+          matchLabels:
+            project: roboshop
       containers:
       - name: nginx
         image: nginx:latest
         ports:
         - containerPort: 80
 ---
-# apiVersion: policy/v1
-# kind: PodDisruptionBudget
-# metadata:
-#   name: nginx
-# spec:
-#   minAvailable: "50%"
-#   selector:
-#     matchLabels:
-#       project: roboshop
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: nginx
+spec:
+  minAvailable: "50%"
+  selector:
+    matchLabels:
+      project: roboshop
